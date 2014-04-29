@@ -9,45 +9,84 @@ class Bottles
   end
 
   def verse(num)
-    "#{quantity(num).capitalize} #{container(num)} of beer on the wall, " +
-    "#{quantity(num)} #{container(num)} of beer.\n" + 
-    "#{action(num)}, "  +
-    "#{quantity(num - 1)} #{container(num - 1)} of beer on the wall.\n"
+    Verse.new(num).verse
   end
 
-  def container(num)
-    if num == 1
+end
+
+
+
+class Verse
+
+attr_reader :num
+
+    
+  def initialize(num)
+    @num = num
+  end
+
+  def verse
+    "#{current_quantity.capitalize} #{starting_container} of beer on the wall, " +
+    "#{current_quantity} #{starting_container} of beer.\n" + 
+    "#{action}, " +
+    "#{remaining_quantity} #{remaining_container} of beer on the wall.\n"
+  end
+
+  def starting_container
+    case @num
+    when 1
       "bottle"
     else
       "bottles"
     end
   end
 
-  def pronoun(num)
-    if num == 1
+  def remaining_container
+    case @num
+    when 2
+      "bottle"
+    else
+      "bottles"
+    end
+  end
+
+  def pronoun
+    if @num == 1
       "it"
     else
       "one"
     end
   end
 
-  def quantity(num)
+ def current_quantity
     if num == 0
       "no more"
-    elsif num < 0
-      99.to_s
     else
       num.to_s
   end
 end
 
-  def action(num)
-    if num == 0
+  def remaining_quantity
+    case @num
+    when 0
+      99.to_s
+    when 1
+      "no more"
+    else
+      (@num - 1).to_s
+    end
+
+  end
+
+  def action
+    if @num == 0
       "Go to the store and buy some more"
     else
-      "Take #{pronoun(num)} down and pass it around"
+      "Take #{pronoun} down and pass it around"
     end
   end
 
+
 end
+
 

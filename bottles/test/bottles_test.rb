@@ -41,6 +41,18 @@ class BottlesTest < Minitest::Test
   end
 
   def test_the_whole_song
+    skip
     assert_equal bottles.verses(99, 0), bottles.sing
   end
+
+  def test_the_six_pack
+    expected = "One 6 pack of beer on the wall, one 6 pack of beer.\nTake one down and pass it around, 5 bottles of beer on the wall.\n"
+    assert_equal expected, bottles.verse(6)
+  end
+
+  def test_verse_7
+    expected = "7 bottles of beer on the wall, 7 bottles of beer.\nTake one down and pass it around, one 6 pack of beer on the wall.\n"
+    assert_equal expected, bottles.verse(7)
+  end
+
 end

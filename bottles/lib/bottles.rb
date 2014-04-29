@@ -1,23 +1,6 @@
 class Bottles
 
-  def no_beer
-    "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
-  end
-
-  def line_one
-    "1 bottle of beer on the wall, 1 bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
-  end
-
-  def line_two
-    "2 bottles of beer on the wall, 2 bottles of beer.\nTake one down and pass it around, 1 bottle of beer on the wall.\n"
-  end
-
-  def beers(num)
-     "#{num} bottles of beer on the wall, #{num} bottles of beer.\nTake one down and pass it around, #{num-1} bottles of beer on the wall.\n"
-  end
-
-
-  def song
+  def sing
     verses(99, 0)
   end
 
@@ -26,17 +9,45 @@ class Bottles
   end
 
   def verse(num)
-    case num
-    when 0
-      no_beer
-    when 1
-     line_one
-    when 2
-     line_two
+    "#{quantity(num).capitalize} #{container(num)} of beer on the wall, " +
+    "#{quantity(num)} #{container(num)} of beer.\n" + 
+    "#{action(num)}, "  +
+    "#{quantity(num - 1)} #{container(num - 1)} of beer on the wall.\n"
+  end
+
+  def container(num)
+    if num == 1
+      "bottle"
     else
-      beers(num)
+      "bottles"
     end
   end
 
-  
+  def pronoun(num)
+    if num == 1
+      "it"
+    else
+      "one"
+    end
+  end
+
+  def quantity(num)
+    if num == 0
+      "no more"
+    elsif num < 0
+      99.to_s
+    else
+      num.to_s
+  end
 end
+
+  def action(num)
+    if num == 0
+      "Go to the store and buy some more"
+    else
+      "Take #{pronoun(num)} down and pass it around"
+    end
+  end
+
+end
+
